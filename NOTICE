@@ -1,0 +1,25 @@
+Splunk SOAR Malwarebytes Cloud
+Copyright (c) Malwarebytes, 2019
+
+Third-party Software Attributions:
+
+Library: oauthlib
+Version: 3.1.0
+License: BSD 3
+License: BSD
+Copyright 2019 The OAuthlib Community
+
+Library: requests-oauthlib
+Version: 1.3.0
+License: ISC
+Copyright 2014 Kenneth Reitz
+
+Library: pudb
+Version: 2019.2
+License: MIT
+Copyright 2009 Andreas Kloeckner and contributors
+
+Library: requests
+Version: 2.25.0
+License: Apache 2.0
+Kenneth Reitz

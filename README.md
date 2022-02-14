@@ -2,11 +2,11 @@
 # Malwarebytes Cloud
 
 Publisher: Malwarebytes  
-Connector Version: 1\.2\.0  
+Connector Version: 1\.2\.1
 Product Vendor: Malwarebytes  
 Product Name: Malwarebytes Endpoint Protection  
 Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 4\.5\.15922  
+Minimum Product Version: 5\.1\.0  
 
 This app integrates with the Malwarebytes Cloud platform to perform prevention, detection, remediation, and forensics endpoint management tasks
 

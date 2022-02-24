@@ -1,4 +1,4 @@
 **Unreleased**
-* Fixed APi requests bugs
-* Added Usage analitics code
-* Added Python3 support
+* Bug Fixed in the API requests
+* Added Usage analytics code
+* Compatibility changes for Python 3 support

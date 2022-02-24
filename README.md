@@ -2,7 +2,7 @@
 # Malwarebytes Cloud
 
 Publisher: Malwarebytes  
-Connector Version: 1\.2\.1
+Connector Version: 2\.0\.0
 Product Vendor: Malwarebytes  
 Product Name: Malwarebytes Endpoint Protection  
 Product Version Supported (regex): "\.\*"  

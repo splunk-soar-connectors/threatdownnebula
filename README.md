@@ -2,7 +2,7 @@
 # Malwarebytes Cloud
 
 Publisher: Malwarebytes  
-Connector Version: 2\.0\.0
+Connector Version: 2\.0\.0  
 Product Vendor: Malwarebytes  
 Product Name: Malwarebytes Endpoint Protection  
 Product Version Supported (regex): "\.\*"  
@@ -10,13 +10,19 @@ Minimum Product Version: 5\.1\.0
 
 This app integrates with the Malwarebytes Cloud platform to perform prevention, detection, remediation, and forensics endpoint management tasks
 
-[comment]: # " "
-[comment]: # "Malwarebytes Cloud app for splunk>phantom"
+[comment]: # " File: README.md"
+[comment]: # "  Copyright (c) Malwarebytes, 2019-2022"
 [comment]: # ""
-[comment]: # "Malwarebytes protects people and businesses against dangerous threats such as malware, ransomware,"
-[comment]: # "and exploits that escape detection by traditional antivirus solutions."
-[comment]: # "The product combines advanced heuristic threat detection with signature-less technologies to detect"
-[comment]: # "and stop a cyber attack before damage occurs."
+[comment]: # "Licensed under the Apache License, Version 2.0 (the 'License');"
+[comment]: # "you may not use this file except in compliance with the License."
+[comment]: # "You may obtain a copy of the License at"
+[comment]: # ""
+[comment]: # "    http://www.apache.org/licenses/LICENSE-2.0"
+[comment]: # ""
+[comment]: # "Unless required by applicable law or agreed to in writing, software distributed under"
+[comment]: # "the License is distributed on an 'AS IS' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,"
+[comment]: # "either express or implied. See the License for the specific language governing permissions"
+[comment]: # "and limitations under the License."
 [comment]: # ""
 ## Authentication
 

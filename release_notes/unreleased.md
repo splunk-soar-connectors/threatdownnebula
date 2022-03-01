@@ -1,4 +1,1 @@
 **Unreleased**
-* Bug Fixed in the API requests
-* Added Usage analytics code
-* Compatibility changes for Python 3 support

@@ -1,5 +1,5 @@
 [comment]: # " File: README.md"
-[comment]: # "  Copyright (c) Malwarebytes, 2019-2022"
+[comment]: # "  Copyright (c) ThreatDown, 2024"
 [comment]: # ""
 [comment]: # "Licensed under the Apache License, Version 2.0 (the 'License');"
 [comment]: # "you may not use this file except in compliance with the License."
@@ -14,7 +14,7 @@
 [comment]: # ""
 ## Authentication
 
-The Malwarebytes App uses the same Cloud console credential to authenticate and issue RESTful API
+The ThreatDown App uses the same Cloud console credential to authenticate and issue RESTful API
 commands.
 
 [![](img/malwarebytes_login.png)](img/malwarebytes_login.png)

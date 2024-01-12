@@ -1,17 +1,17 @@
 [comment]: # "Auto-generated SOAR connector documentation"
-# Malwarebytes Cloud
+# ThreatDown Nebula
 
-Publisher: Malwarebytes  
+Publisher: ThreatDown  
 Connector Version: 2\.0\.0  
-Product Vendor: Malwarebytes  
-Product Name: Malwarebytes Endpoint Protection  
+Product Vendor: ThreatDown  
+Product Name: ThreatDown Endpoint Protection  
 Product Version Supported (regex): "\.\*"  
 Minimum Product Version: 5\.1\.0  
 
 This app integrates with the Malwarebytes Cloud platform to perform prevention, detection, remediation, and forensics endpoint management tasks
 
 [comment]: # " File: README.md"
-[comment]: # "  Copyright (c) Malwarebytes, 2019-2022"
+[comment]: # "  Copyright (c) ThreatDown, 2024"
 [comment]: # ""
 [comment]: # "Licensed under the Apache License, Version 2.0 (the 'License');"
 [comment]: # "you may not use this file except in compliance with the License."

@@ -2,13 +2,13 @@
 # ThreatDown Nebula
 
 Publisher: ThreatDown  
-Connector Version: 2\.0\.0  
+Connector Version: 2\.0\.1  
 Product Vendor: ThreatDown  
 Product Name: ThreatDown Endpoint Protection  
 Product Version Supported (regex): "\.\*"  
 Minimum Product Version: 5\.1\.0  
 
-This app integrates with the Malwarebytes Cloud platform to perform prevention, detection, remediation, and forensics endpoint management tasks
+This app integrates with the ThreatDown Nebula platform to perform prevention, detection, remediation, and forensics endpoint management tasks
 
 [comment]: # " File: README.md"
 [comment]: # "  Copyright (c) ThreatDown, 2024"
@@ -26,20 +26,20 @@ This app integrates with the Malwarebytes Cloud platform to perform prevention, 
 [comment]: # ""
 ## Authentication
 
-The Malwarebytes App uses the same Cloud console credential to authenticate and issue RESTful API
+The ThreatDown Nebula App uses the same Cloud console credential to authenticate and issue RESTful API
 commands.
 
 [![](img/malwarebytes_login.png)](img/malwarebytes_login.png)
 
 
 ### Configuration Variables
-The below configuration variables are required for this Connector to operate.  These variables are specified when configuring a Malwarebytes Endpoint Protection asset in SOAR.
+The below configuration variables are required for this Connector to operate.  These variables are specified when configuring a ThreatDown Endpoint Protection asset in SOAR.
 
 VARIABLE | REQUIRED | TYPE | DESCRIPTION
 -------- | -------- | ---- | -----------
-**accountid** |  required  | string | Malwarebytes Cloud Account ID
-**clientid** |  required  | string | Malwarebytes Cloud Client ID
-**clientsecret** |  required  | password | Malwarebytes Cloud Client Secret
+**accountid** |  required  | string | ThreatDown Nebula Account ID
+**clientid** |  required  | string | ThreatDown Nebula Client ID
+**clientsecret** |  required  | password | ThreatDown Nebula Client Secret
 
 ### Supported Actions  
 [test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration  

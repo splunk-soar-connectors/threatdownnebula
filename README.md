@@ -4,9 +4,9 @@
 Publisher: ThreatDown  
 Connector Version: 2\.0\.1  
 Product Vendor: ThreatDown  
-Product Name: ThreatDown Endpoint Protection  
+Product Name: Malwarebytes Endpoint Protection  
 Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 5\.1\.0  
+Minimum Product Version: 6\.1\.1  
 
 This app integrates with the ThreatDown Nebula platform to perform prevention, detection, remediation, and forensics endpoint management tasks
 

@@ -11,7 +11,7 @@ Minimum Product Version: 6\.1\.1
 This app integrates with the ThreatDown Nebula platform to perform prevention, detection, remediation, and forensics endpoint management tasks
 
 [comment]: # " File: README.md"
-[comment]: # "  Copyright (c) ThreatDown, 2024"
+[comment]: # "  Copyright (c) ThreatDown, 2019-2024"
 [comment]: # ""
 [comment]: # "Licensed under the Apache License, Version 2.0 (the 'License');"
 [comment]: # "you may not use this file except in compliance with the License."

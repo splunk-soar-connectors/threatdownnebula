@@ -29,7 +29,7 @@ This app integrates with the ThreatDown Nebula platform to perform prevention, d
 The ThreatDown Nebula App uses the same Cloud console credential to authenticate and issue RESTful API
 commands.
 
-[![](img/malwarebytes_login.png)](img/malwarebytes_login.png)
+[![](img/threatdown_login.png)](img/threatdown_login.png)
 
 
 ### Configuration Variables

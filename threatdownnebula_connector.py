@@ -1,4 +1,4 @@
-# File: malwarebytescloud_connector.py
+# File: threatdownnebula_connector.py
 #
 # Copyright (c) ThreatDown, 2019-2024
 #
@@ -16,7 +16,7 @@
 # Phantom App imports
 
 # Usage of the consts file is recommended
-# from malwarebytescloud_consts import *
+# from threatdownnebula__consts import *
 import json
 import time
 from datetime import datetime
@@ -43,12 +43,12 @@ class RetVal(tuple):
         return tuple.__new__(RetVal, (val1, val2))
 
 
-class MalwarebytesCloudConnector(BaseConnector):
+class ThreatDownNebulaConnector(BaseConnector):
 
     def __init__(self):
 
         # Call the BaseConnectors init first
-        super(MalwarebytesCloudConnector, self).__init__()
+        super(ThreatDownNebulaConnector, self).__init__()
 
         self._state = None
         self._base_url = None
@@ -505,7 +505,7 @@ class MalwarebytesCloudConnector(BaseConnector):
             nebula = OAuth2Session(client=client, scope=self.client_scope)
             nebula.headers.update(self.HEADER)
             nebula.fetch_token(token_url=self._base_url + '/oauth2/token', client_secret=self.client_secret, scope=self.client_scope)
-            # Malwarebytes Telemerty Code.
+            # ThreatDown Telemerty Code.
             try:
                 TELEMETRY_LINK = "https://api-msp-telemetry.malwarebytes.com/data"
                 APP_VERSION = "2.0.0"
@@ -667,7 +667,7 @@ if __name__ == '__main__':
         in_json = json.loads(in_json)
         print(json.dumps(in_json, indent=4))
 
-        connector = MalwarebytesCloudConnector()
+        connector = ThreatDownNebulaConnector()
         connector.print_progress_message = True
 
         if session_id is not None:

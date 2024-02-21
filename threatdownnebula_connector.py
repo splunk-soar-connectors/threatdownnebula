@@ -16,7 +16,7 @@
 # Phantom App imports
 
 # Usage of the consts file is recommended
-# from threatdownnebula__consts import *
+# from threatdownnebula_consts import *
 import json
 import time
 from datetime import datetime

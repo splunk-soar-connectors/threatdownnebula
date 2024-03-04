@@ -1,2 +1,1 @@
 **Unreleased**
-* Changed App name from 'Malwarebytes Cloud' to 'ThreatDown'

@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/phantomcyber/dev-cicd-tools
-    rev: v1.16
+    rev: v1.17
     hooks:
     -   id: org-hook
     -   id: package-app-dependencies
@@ -8,4 +8,4 @@ repos:
     rev: v1.4.0
     hooks:
     -   id: detect-secrets
-        args: ['--no-verify', '--exclude-files', '^malwarebytescloud.json$']
+        args: ['--no-verify', '--exclude-files', '^threatdownnebula.json$']

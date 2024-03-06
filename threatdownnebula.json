@@ -1,70 +1,50 @@
 {
     "appid": "5c742a84-46e6-4e28-8475-f26d9873216d",
-    "name": "Malwarebytes Cloud",
-    "description": "This app integrates with the Malwarebytes Cloud platform to perform prevention, detection, remediation, and forensics endpoint management tasks",
+    "name": "ThreatDown Nebula",
+    "description": "This app integrates with the ThreatDown (powered by Malwarebytes) Nebula platform to perform prevention, detection, remediation, and forensics endpoint management tasks",
     "type": "endpoint",
-    "product_vendor": "Malwarebytes",
-    "logo": "logo_malwarebytescloud.svg",
-    "logo_dark": "logo_malwarebytescloud_dark.svg",
+    "product_vendor": "ThreatDown",
+    "logo": "logo_threatdownnebula.svg",
+    "logo_dark": "logo_threatdownnebula_dark.svg",
     "product_name": "Malwarebytes Endpoint Protection",
     "python_version": "3",
     "product_version_regex": ".*",
-    "publisher": "Malwarebytes",
-    "license": "Copyright (c) Malwarebytes, 2019-2022",
-    "app_version": "2.0.0",
+    "publisher": "ThreatDown",
+    "license": "Copyright (c) ThreatDown, 2019-2024",
+    "app_version": "2.1.0",
     "utctime_updated": "2022-01-07T20:37:48.000000Z",
-    "package_name": "phantom_malwarebytescloud",
-    "main_module": "malwarebytescloud_connector.py",
-    "min_phantom_version": "5.1.0",
+    "package_name": "phantom_threatdownnebula",
+    "main_module": "threatdownnebula_connector.py",
+    "min_phantom_version": "6.1.1",
     "app_wizard_version": "1.0.0",
     "fips_compliant": false,
     "pip_dependencies": {
         "wheel": [
             {
-                "module": "certifi",
-                "input_file": "wheels/shared/certifi-2021.10.8-py2.py3-none-any.whl"
-            },
-            {
-                "module": "chardet",
-                "input_file": "wheels/shared/chardet-3.0.4-py2.py3-none-any.whl"
-            },
-            {
-                "module": "idna",
-                "input_file": "wheels/shared/idna-2.10-py2.py3-none-any.whl"
-            },
-            {
                 "module": "oauthlib",
                 "input_file": "wheels/shared/oauthlib-3.1.0-py2.py3-none-any.whl"
             },
             {
-                "module": "requests",
-                "input_file": "wheels/shared/requests-2.25.0-py2.py3-none-any.whl"
-            },
-            {
                 "module": "requests_oauthlib",
                 "input_file": "wheels/shared/requests_oauthlib-1.3.0-py2.py3-none-any.whl"
-            },
-            {
-                "module": "urllib3",
-                "input_file": "wheels/shared/urllib3-1.26.8-py2.py3-none-any.whl"
             }
         ]
     },
     "configuration": {
         "accountid": {
-            "description": "Malwarebytes Cloud Account ID",
+            "description": "ThreatDown Nebula Account ID",
             "data_type": "string",
             "required": true,
             "order": 0
         },
         "clientid": {
-            "description": "Malwarebytes Cloud Client ID",
+            "description": "ThreatDown Nebula Client ID",
             "data_type": "string",
             "required": true,
             "order": 2
         },
         "clientsecret": {
-            "description": "Malwarebytes Cloud Client Secret",
+            "description": "ThreatDown Nebula Client Secret",
             "data_type": "password",
             "required": true,
             "order": 1
@@ -991,5 +971,17 @@
             },
             "versions": "EQ(*)"
         }
-    ]
+    ],
+    "pip39_dependencies": {
+        "wheel": [
+            {
+                "module": "oauthlib",
+                "input_file": "wheels/shared/oauthlib-3.1.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "requests_oauthlib",
+                "input_file": "wheels/shared/requests_oauthlib-1.3.0-py2.py3-none-any.whl"
+            }
+        ]
+    }
 }

@@ -1,6 +1,6 @@
-# File: malwarebytescloud_connector.py
+# File: threatdownnebula_connector.py
 #
-# Copyright (c) Malwarebytes, 2019-2022
+# Copyright (c) ThreatDown, 2019-2024
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 # Phantom App imports
 
 # Usage of the consts file is recommended
-# from malwarebytescloud_consts import *
+# from threatdownnebula_consts import *
 import json
 import time
 from datetime import datetime
@@ -29,10 +29,10 @@ from phantom.base_connector import BaseConnector
 from requests_oauthlib import OAuth2Session
 
 __author__ = "Rohin Sambath Kumar"
-__copyright__ = "Copyright 2022, Malwarebytes"
+__copyright__ = "Copyright 2019-2024, ThreatDown"
 __credits__ = ["Rohin Sambath Kumar"]
 __license__ = "GPL"
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 __maintainer__ = "Rohin Sambath Kumar"
 __email__ = "rskumar@malwarebytes.com"
 __status__ = "Production"
@@ -43,12 +43,12 @@ class RetVal(tuple):
         return tuple.__new__(RetVal, (val1, val2))
 
 
-class MalwarebytesCloudConnector(BaseConnector):
+class ThreatDownNebulaConnector(BaseConnector):
 
     def __init__(self):
 
         # Call the BaseConnectors init first
-        super(MalwarebytesCloudConnector, self).__init__()
+        super(ThreatDownNebulaConnector, self).__init__()
 
         self._state = None
         self._base_url = None
@@ -67,7 +67,7 @@ class MalwarebytesCloudConnector(BaseConnector):
         # Also typically it does not add any data into an action_result either.
         # The status and progress messages are more important.
 
-        self.save_progress("Connecting to Malwarebytes Cloud")
+        self.save_progress("Connecting to ThreatDown Nebula")
 
         try:
             self.save_progress("Account ID: {}".format(self.account_id))
@@ -76,13 +76,13 @@ class MalwarebytesCloudConnector(BaseConnector):
             nebula = OAuth2Session(client=client, scope=self.client_scope)
             nebula.headers.update(self.HEADER)
             nebula.fetch_token(token_url="{}/oauth2/token".format(self._base_url), client_secret=self.client_secret, scope=self.client_scope)
-            self.save_progress("Login to Malwarebytes Cloud is successful")
+            self.save_progress("Login to ThreatDown Nebula is successful")
         except Exception as err:
             if "'ascii' codec can't decode" in str(err):
                 return action_result.set_status(phantom.APP_ERROR,
-                "Error Connecting to Malwarebytes Cloud. Please provide valid asset configuration parameters.")
+                "Error Connecting to ThreatDown Nebula. Please provide valid asset configuration parameters.")
             return action_result.set_status(phantom.APP_ERROR,
-            "Error Connecting to Malwarebytes Cloud. Details: {0}".format(str(err)))
+            "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err)))
 
         # Return success
         return action_result.set_status(phantom.APP_SUCCESS)
@@ -505,7 +505,7 @@ class MalwarebytesCloudConnector(BaseConnector):
             nebula = OAuth2Session(client=client, scope=self.client_scope)
             nebula.headers.update(self.HEADER)
             nebula.fetch_token(token_url=self._base_url + '/oauth2/token', client_secret=self.client_secret, scope=self.client_scope)
-            # Malwarebytes Telemerty Code.
+            # ThreatDown Telemerty Code.
             try:
                 TELEMETRY_LINK = "https://api-msp-telemetry.malwarebytes.com/data"
                 APP_VERSION = "2.0.0"
@@ -514,7 +514,7 @@ class MalwarebytesCloudConnector(BaseConnector):
                         "timestamp": str(telemetry_ts),
                         "integration_code": "TA-PH",
                         "integration_name": "Splunk Phantom",
-                        "integration_app": "Malwarebytes Cloud",
+                        "integration_app": "ThreatDown Nebula",
                         "integration_app_version": APP_VERSION,
                         "nebula_account_id": self.account_id.decode("utf8"),
                         "ov_account_id": "",
@@ -537,7 +537,7 @@ class MalwarebytesCloudConnector(BaseConnector):
             return(phantom.APP_SUCCESS, nebula)
         except Exception as err:
             return RetVal(action_result.set_status(phantom.APP_ERROR,
-            "Error Connecting to Malwarebytes Cloud. Details: {0}".format(str(err))), None)
+            "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err))), None)
 
     def handle_action(self, param):
 
@@ -667,7 +667,7 @@ if __name__ == '__main__':
         in_json = json.loads(in_json)
         print(json.dumps(in_json, indent=4))
 
-        connector = MalwarebytesCloudConnector()
+        connector = ThreatDownNebulaConnector()
         connector.print_progress_message = True
 
         if session_id is not None:

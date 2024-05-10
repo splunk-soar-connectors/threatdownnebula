@@ -2,7 +2,7 @@
 # ThreatDown Nebula
 
 Publisher: ThreatDown  
-Connector Version: 2.1.0  
+Connector Version: 2.1.1  
 Product Vendor: ThreatDown  
 Product Name: Malwarebytes Endpoint Protection  
 Product Version Supported (regex): ".\*"  

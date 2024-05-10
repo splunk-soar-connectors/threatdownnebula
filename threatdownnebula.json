@@ -11,7 +11,7 @@
     "product_version_regex": ".*",
     "publisher": "ThreatDown",
     "license": "Copyright (c) ThreatDown, 2019-2024",
-    "app_version": "2.1.0",
+    "app_version": "2.1.1",
     "utctime_updated": "2022-01-07T20:37:48.000000Z",
     "package_name": "phantom_threatdownnebula",
     "main_module": "threatdownnebula_connector.py",

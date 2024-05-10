@@ -32,7 +32,7 @@ __author__ = "Rohin Sambath Kumar"
 __copyright__ = "Copyright 2019-2024, ThreatDown"
 __credits__ = ["Rohin Sambath Kumar"]
 __license__ = "GPL"
-__version__ = "2.0.1"
+__version__ = "2.1.1"
 __maintainer__ = "Rohin Sambath Kumar"
 __email__ = "rskumar@malwarebytes.com"
 __status__ = "Production"
@@ -55,7 +55,7 @@ class ThreatDownNebulaConnector(BaseConnector):
         self.HEADER = {"Content-Type": "application/json"}
 
     def NEBULA_URL(self, path):
-        return "{NEBULA_URL}{PATH}".format(NEBULA_URL="https://cloud.malwarebytes.com", PATH=path)
+        return "{NEBULA_URL}{PATH}".format(NEBULA_URL="https://cloud.threatdown.com", PATH=path)
 
     def _handle_test_connectivity(self, param):
 
@@ -507,8 +507,8 @@ class ThreatDownNebulaConnector(BaseConnector):
             nebula.fetch_token(token_url=self._base_url + '/oauth2/token', client_secret=self.client_secret, scope=self.client_scope)
             # ThreatDown Telemerty Code.
             try:
-                TELEMETRY_LINK = "https://api-msp-telemetry.malwarebytes.com/data"
-                APP_VERSION = "2.0.0"
+                TELEMETRY_LINK = "https://api-msp-telemetry.threatdown.com/data"
+                APP_VERSION = "2.1.1"
                 telemetry_ts = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
                 data = {
                         "timestamp": str(telemetry_ts),
@@ -594,7 +594,7 @@ class ThreatDownNebulaConnector(BaseConnector):
 
         # Access values in asset config by the name
         # Required values can be accessed directly
-        self._base_url = 'https://cloud.malwarebytes.com'
+        self._base_url = 'https://cloud.threatdown.com'
         self.account_id = config['accountid'].encode('utf-8')
         self.client_id = config['clientid'].encode('utf-8')
         self.client_secret = config['clientsecret']

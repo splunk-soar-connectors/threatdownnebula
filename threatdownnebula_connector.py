@@ -34,7 +34,7 @@ __credits__ = ["Rohin Sambath Kumar"]
 __license__ = "GPL"
 __version__ = "2.1.1"
 __maintainer__ = "Rohin Sambath Kumar"
-__email__ = "rskumar@malwarebytes.com"
+__email__ = "support@threatdown.com"
 __status__ = "Production"
 
 

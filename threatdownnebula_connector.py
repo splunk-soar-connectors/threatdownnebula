@@ -534,7 +534,7 @@ class ThreatDownNebulaConnector(BaseConnector):
             except Exception:
                 self.debug_print("Error in telemetry! Skipping this step.")
 
-            return(phantom.APP_SUCCESS, nebula)
+            return (phantom.APP_SUCCESS, nebula)
         except Exception as err:
             return RetVal(action_result.set_status(phantom.APP_ERROR,
             "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err))), None)
@@ -633,7 +633,7 @@ if __name__ == '__main__':
     password = args.password
     verify = args.verify
 
-    if(username is not None and password is None):
+    if (username is not None and password is None):
 
         # User specified a username but not a password, so ask
         import getpass

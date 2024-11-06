@@ -15,7 +15,7 @@
     "utctime_updated": "2022-01-07T20:37:48.000000Z",
     "package_name": "phantom_threatdownnebula",
     "main_module": "threatdownnebula_connector.py",
-    "min_phantom_version": "6.1.1",
+    "min_phantom_version": "6.2.2",
     "app_wizard_version": "1.0.0",
     "fips_compliant": false,
     "pip_dependencies": {

@@ -2,7 +2,7 @@
 # ThreatDown Nebula
 
 Publisher: ThreatDown  
-Connector Version: 2.1.1  
+Connector Version: 2.2.0  
 Product Vendor: ThreatDown  
 Product Name: Malwarebytes Endpoint Protection  
 Product Version Supported (regex): ".\*"  
@@ -240,7 +240,7 @@ action_result.data.\*.machines.\*.name | string |  |   test
 action_result.data.\*.machines.\*.online | boolean |  |   True  False 
 action_result.data.\*.machines.\*.os_architecture | string |  |   AMD64 
 action_result.data.\*.machines.\*.os_platform | string |  |   WINDOWS 
-action_result.data.\*.machines.\*.os_release_name | string |  |   Microsoft Windows 10 Pro 
+action_result.data.\*.machines.\*.os_release_name | string |  |   Test OS 10 
 action_result.data.\*.total_count | numeric |  |   7 
 action_result.summary | string |  |  
 action_result.message | string |  |  
@@ -270,7 +270,7 @@ action_result.data.\*.name | string |  |   WIN-V9TNRP1M0G4
 action_result.data.\*.online | boolean |  |   True  False 
 action_result.data.\*.os_architecture | string |  |   AMD64 
 action_result.data.\*.os_platform | string |  |   WINDOWS 
-action_result.data.\*.os_release_name | string |  |   Microsoft Windows 10 Pro 
+action_result.data.\*.os_release_name | string |  |   Test OS 10 
 action_result.summary | string |  |  
 action_result.message | string |  |   Message from action 
 summary.total_objects | numeric |  |   1 

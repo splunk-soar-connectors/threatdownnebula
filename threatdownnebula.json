@@ -11,7 +11,7 @@
     "product_version_regex": ".*",
     "publisher": "ThreatDown",
     "license": "Copyright (c) ThreatDown, 2019-2024",
-    "app_version": "2.1.1",
+    "app_version": "2.2.0",
     "utctime_updated": "2022-01-07T20:37:48.000000Z",
     "package_name": "phantom_threatdownnebula",
     "main_module": "threatdownnebula_connector.py",
@@ -21,12 +21,24 @@
     "pip_dependencies": {
         "wheel": [
             {
+                "module": "Pygments",
+                "input_file": "wheels/py3/Pygments-2.14.0-py3-none-any.whl"
+            },
+            {
                 "module": "oauthlib",
                 "input_file": "wheels/shared/oauthlib-3.1.0-py2.py3-none-any.whl"
             },
             {
+                "module": "pudb",
+                "input_file": "wheels/py3/pudb-2019.2-py3-none-any.whl"
+            },
+            {
                 "module": "requests_oauthlib",
                 "input_file": "wheels/shared/requests_oauthlib-1.3.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "urwid",
+                "input_file": "wheels/py36/urwid-2.1.2-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_28_x86_64.whl"
             }
         ]
     },
@@ -591,7 +603,7 @@
                     "column_name": "OS",
                     "column_order": 1,
                     "example_values": [
-                        "Microsoft Windows 10 Pro"
+                        "Test OS 10"
                     ]
                 },
                 {
@@ -738,7 +750,7 @@
                     "column_name": "OS Release Name",
                     "column_order": 4,
                     "example_values": [
-                        "Microsoft Windows 10 Pro"
+                        "Test OS 10"
                     ]
                 },
                 {
@@ -979,8 +991,28 @@
                 "input_file": "wheels/shared/oauthlib-3.1.0-py2.py3-none-any.whl"
             },
             {
+                "module": "pudb",
+                "input_file": "wheels/py3/pudb-2019.2-py3-none-any.whl"
+            },
+            {
+                "module": "pygments",
+                "input_file": "wheels/py3/pygments-2.18.0-py3-none-any.whl"
+            },
+            {
                 "module": "requests_oauthlib",
                 "input_file": "wheels/shared/requests_oauthlib-1.3.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "typing_extensions",
+                "input_file": "wheels/py3/typing_extensions-4.12.2-py3-none-any.whl"
+            },
+            {
+                "module": "urwid",
+                "input_file": "wheels/py3/urwid-2.6.16-py3-none-any.whl"
+            },
+            {
+                "module": "wcwidth",
+                "input_file": "wheels/shared/wcwidth-0.2.13-py2.py3-none-any.whl"
             }
         ]
     }

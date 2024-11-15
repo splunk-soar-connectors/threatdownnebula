@@ -17,6 +17,9 @@
     "main_module": "threatdownnebula_connector.py",
     "min_phantom_version": "6.2.2",
     "app_wizard_version": "1.0.0",
+    "latest_tested_versions": [
+        "ThreatDown Nebula v2.2.0 (2024-11-05)"
+    ],
     "fips_compliant": false,
     "pip_dependencies": {
         "wheel": [

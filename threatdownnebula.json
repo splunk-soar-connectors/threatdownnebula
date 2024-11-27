@@ -984,14 +984,6 @@
             {
                 "module": "requests_oauthlib",
                 "input_file": "wheels/shared/requests_oauthlib-1.3.0-py2.py3-none-any.whl"
-            },
-            {
-                "module": "typing_extensions",
-                "input_file": "wheels/py3/typing_extensions-4.12.2-py3-none-any.whl"
-            },
-            {
-                "module": "wcwidth",
-                "input_file": "wheels/shared/wcwidth-0.2.13-py2.py3-none-any.whl"
             }
         ]
     }

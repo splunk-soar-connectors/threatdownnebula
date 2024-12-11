@@ -32,9 +32,9 @@ __author__ = "Rohin Sambath Kumar"
 __copyright__ = "Copyright 2019-2024, ThreatDown"
 __credits__ = ["Rohin Sambath Kumar"]
 __license__ = "GPL"
-__version__ = "2.0.1"
+__version__ = "2.1.1"
 __maintainer__ = "Rohin Sambath Kumar"
-__email__ = "rskumar@malwarebytes.com"
+__email__ = "support@threatdown.com"
 __status__ = "Production"
 
 
@@ -55,7 +55,7 @@ class ThreatDownNebulaConnector(BaseConnector):
         self.HEADER = {"Content-Type": "application/json"}
 
     def NEBULA_URL(self, path):
-        return "{NEBULA_URL}{PATH}".format(NEBULA_URL="https://cloud.malwarebytes.com", PATH=path)
+        return "{NEBULA_URL}{PATH}".format(NEBULA_URL="https://cloud.threatdown.com", PATH=path)
 
     def _handle_test_connectivity(self, param):
 
@@ -79,10 +79,10 @@ class ThreatDownNebulaConnector(BaseConnector):
             self.save_progress("Login to ThreatDown Nebula is successful")
         except Exception as err:
             if "'ascii' codec can't decode" in str(err):
-                return action_result.set_status(phantom.APP_ERROR,
-                "Error Connecting to ThreatDown Nebula. Please provide valid asset configuration parameters.")
-            return action_result.set_status(phantom.APP_ERROR,
-            "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err)))
+                return action_result.set_status(
+                    phantom.APP_ERROR, "Error Connecting to ThreatDown Nebula. Please provide valid asset configuration parameters."
+                )
+            return action_result.set_status(phantom.APP_ERROR, "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err)))
 
         # Return success
         return action_result.set_status(phantom.APP_SUCCESS)
@@ -99,33 +99,33 @@ class ThreatDownNebulaConnector(BaseConnector):
             more_data = True
             total_count = 0
             running_count = 0
-            next_cursor = ''
-            results = {'machines': []}
+            next_cursor = ""
+            results = {"machines": []}
             machines = []
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
 
             while more_data:
-                resp = nebula.get(self.NEBULA_URL('/api/v2/endpoints?next_cursor=' + next_cursor))
+                resp = nebula.get(self.NEBULA_URL("/api/v2/endpoints?next_cursor=" + next_cursor))
                 data = json.loads(resp.text)
 
-                rate_limit = int(resp.headers.get('x-rate-limit-remaining'))
+                rate_limit = int(resp.headers.get("x-rate-limit-remaining"))
                 if rate_limit < 10:
                     time.sleep(60)
 
-                total_count = data.get('total_count')
-                next_cursor = data.get('next_cursor')
-                machines += data.get('machines')
-                running_count += len(data.get('machines'))
+                total_count = data.get("total_count")
+                next_cursor = data.get("next_cursor")
+                machines += data.get("machines")
+                running_count += len(data.get("machines"))
                 if total_count > running_count:
                     more_data = True
                 else:
                     more_data = False
 
-            self.save_progress("Total endpoints found: {0}".format(str(len(results['machines']))))
+            self.save_progress("Total endpoints found: {0}".format(str(len(results["machines"]))))
             # Add the response into the data section
-            results = {'machines': machines}
+            results = {"machines": machines}
             action_result.add_data(results)
         except Exception as err:
             return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in list_endpoints. Details: {0}".format(str(err))))
@@ -155,17 +155,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "command": "command.threat.scan",
-            "data": {"scan_settings": {"type": "ThreatScan", "remove": True}},
-            "machine_ids": [id]}
+        body = {"command": "command.threat.scan", "data": {"scan_settings": {"type": "ThreatScan", "remove": True}}, "machine_ids": [id]}
 
         # scan and remediate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -196,17 +193,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "command": "command.threat.scan",
-            "data": {"scan_settings": {"type": "ThreatScan", "remove": False}},
-            "machine_ids": [id]}
+        body = {"command": "command.threat.scan", "data": {"scan_settings": {"type": "ThreatScan", "remove": False}}, "machine_ids": [id]}
 
         # scan and remediate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -236,17 +230,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "machine_ids": [id],
-            "data": {"process": True, "network": True, "desktop": True}
-        }
+        body = {"machine_ids": [id], "data": {"process": True, "network": True, "desktop": True}}
 
         # Isolate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs/endpoints/isolate'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -276,17 +267,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "machine_ids": [id],
-            "data": {"process": True}
-        }
+        body = {"machine_ids": [id], "data": {"process": True}}
 
         # Isolate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs/endpoints/isolate'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -316,17 +304,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "machine_ids": [id],
-            "data": {"network": True}
-        }
+        body = {"machine_ids": [id], "data": {"network": True}}
 
         # Isolate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs/endpoints/isolate'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -356,17 +341,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "machine_ids": [id],
-            "data": {"desktop": True}
-        }
+        body = {"machine_ids": [id], "data": {"desktop": True}}
 
         # Isolate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs/endpoints/isolate'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -396,16 +378,14 @@ class ThreatDownNebulaConnector(BaseConnector):
         headers = self.HEADER
         headers.update({"content-type": "application/json; charset=UTF-8"})
 
-        body = {
-            "machine_ids": [id]
-        }
+        body = {"machine_ids": [id]}
 
         # Isolate endpoint
         try:
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.post(self.NEBULA_URL('/api/v2/jobs/endpoints/unlock'), data=json.dumps(body), headers=headers)
+            response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/unlock"), data=json.dumps(body), headers=headers)
             self.save_progress("response: {0}".format(response.text))
             action_result.add_data(response.text)
         except Exception as err:
@@ -438,7 +418,7 @@ class ThreatDownNebulaConnector(BaseConnector):
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.get(self.NEBULA_URL('/api/v2/endpoints/' + id))
+            response = nebula.get(self.NEBULA_URL("/api/v2/endpoints/" + id))
             data = json.loads(response.text)
             self.save_progress("response: {0}".format(response.text))
         except Exception as err:
@@ -464,7 +444,7 @@ class ThreatDownNebulaConnector(BaseConnector):
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.get(self.NEBULA_URL('/api/v2/scans/' + scan_id))
+            response = nebula.get(self.NEBULA_URL("/api/v2/scans/" + scan_id))
             data = json.loads(response.text)
             self.save_progress("response: {0}".format(response.text))
         except Exception as err:
@@ -480,11 +460,11 @@ class ThreatDownNebulaConnector(BaseConnector):
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status(), None
-            response = nebula.get(self.NEBULA_URL('/api/v2/endpoints?search_string=' + search_text))
+            response = nebula.get(self.NEBULA_URL("/api/v2/endpoints?search_string=" + search_text))
             data = json.loads(response.text)
             self.save_progress("response: {0}".format(response.text))
         except Exception as err:
-            return RetVal(action_result.set_status( phantom.APP_ERROR, "Error in _get_agent_id. Details: {0}".format(str(err))), None)
+            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in _get_agent_id. Details: {0}".format(str(err))), None)
 
         endpoints_found = data.get("total_count")
         self.save_progress("Endpoints found: " + str(endpoints_found))
@@ -494,35 +474,35 @@ class ThreatDownNebulaConnector(BaseConnector):
             return phantom.APP_SUCCESS, "0"
         elif endpoints_found > 1:
             return phantom.APP_SUCCESS, "99"
-        elif data.get('machines') and data.get('machines')[0].get('id'):
-            return phantom.APP_SUCCESS, data.get('machines')[0].get('id')
+        elif data.get("machines") and data.get("machines")[0].get("id"):
+            return phantom.APP_SUCCESS, data.get("machines")[0].get("id")
         else:
-            return RetVal(action_result.set_status( phantom.APP_ERROR, "Error while getting the agent ID"), None)
+            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error while getting the agent ID"), None)
 
     def _get_nebula_client(self, action_result):
         try:
             client = BackendApplicationClient(self.client_id, scope=self.client_scope)
             nebula = OAuth2Session(client=client, scope=self.client_scope)
             nebula.headers.update(self.HEADER)
-            nebula.fetch_token(token_url=self._base_url + '/oauth2/token', client_secret=self.client_secret, scope=self.client_scope)
+            nebula.fetch_token(token_url=self._base_url + "/oauth2/token", client_secret=self.client_secret, scope=self.client_scope)
             # ThreatDown Telemerty Code.
             try:
-                TELEMETRY_LINK = "https://api-msp-telemetry.malwarebytes.com/data"
-                APP_VERSION = "2.0.0"
+                TELEMETRY_LINK = "https://api-msp-telemetry.threatdown.com/data"
+                APP_VERSION = "2.1.1"
                 telemetry_ts = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
                 data = {
-                        "timestamp": str(telemetry_ts),
-                        "integration_code": "TA-PH",
-                        "integration_name": "Splunk Phantom",
-                        "integration_app": "ThreatDown Nebula",
-                        "integration_app_version": APP_VERSION,
-                        "nebula_account_id": self.account_id.decode("utf8"),
-                        "ov_account_id": "",
-                        "mbbr_license_key": "",
-                        "api_client_id": self.client_id.decode("utf8"),
-                        "custom_fields": [],
-                        "msg_type": "INTEGRATION INUSE",
-                        "token": "Bearer " + str(nebula.access_token)
+                    "timestamp": str(telemetry_ts),
+                    "integration_code": "TA-PH",
+                    "integration_name": "Splunk Phantom",
+                    "integration_app": "ThreatDown Nebula",
+                    "integration_app_version": APP_VERSION,
+                    "nebula_account_id": self.account_id.decode("utf8"),
+                    "ov_account_id": "",
+                    "mbbr_license_key": "",
+                    "api_client_id": self.client_id.decode("utf8"),
+                    "custom_fields": [],
+                    "msg_type": "INTEGRATION INUSE",
+                    "token": "Bearer " + str(nebula.access_token),
                 }
                 body = json.dumps(data)
                 telemetry_response = nebula.post(TELEMETRY_LINK, data=body)
@@ -534,10 +514,11 @@ class ThreatDownNebulaConnector(BaseConnector):
             except Exception:
                 self.debug_print("Error in telemetry! Skipping this step.")
 
-            return(phantom.APP_SUCCESS, nebula)
+            return (phantom.APP_SUCCESS, nebula)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR,
-            "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err))), None)
+            return RetVal(
+                action_result.set_status(phantom.APP_ERROR, "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err))), None
+            )
 
     def handle_action(self, param):
 
@@ -548,37 +529,37 @@ class ThreatDownNebulaConnector(BaseConnector):
 
         self.debug_print("action_id", self.get_action_identifier())
 
-        if action_id == 'test_connectivity':
+        if action_id == "test_connectivity":
             ret_val = self._handle_test_connectivity(param)
 
-        elif action_id == 'list_endpoints':
+        elif action_id == "list_endpoints":
             ret_val = self._handle_list_endpoints(param)
 
-        elif action_id == 'scan_remediate_endpoint':
+        elif action_id == "scan_remediate_endpoint":
             ret_val = self._handle_scan_remediate_endpoint(param)
 
-        elif action_id == 'scan_report_endpoint':
+        elif action_id == "scan_report_endpoint":
             ret_val = self._handle_scan_report_endpoint(param)
 
-        elif action_id == 'isolate_endpoint':
+        elif action_id == "isolate_endpoint":
             ret_val = self._handle_isolate_endpoint(param)
 
-        elif action_id == 'deisolate_endpoint':
+        elif action_id == "deisolate_endpoint":
             ret_val = self._handle_deisolate_endpoint(param)
 
-        elif action_id == 'isolate_process':
+        elif action_id == "isolate_process":
             ret_val = self._handle_isolate_process(param)
 
-        elif action_id == 'isolate_desktop':
+        elif action_id == "isolate_desktop":
             ret_val = self._handle_isolate_desktop(param)
 
-        elif action_id == 'isolate_network':
+        elif action_id == "isolate_network":
             ret_val = self._handle_isolate_network(param)
 
-        elif action_id == 'get_endpoint_info':
+        elif action_id == "get_endpoint_info":
             ret_val = self._handle_get_endpoint_info(param)
 
-        elif action_id == 'get_scan_info':
+        elif action_id == "get_scan_info":
             ret_val = self._handle_get_scan_info(param)
 
         return ret_val
@@ -594,10 +575,10 @@ class ThreatDownNebulaConnector(BaseConnector):
 
         # Access values in asset config by the name
         # Required values can be accessed directly
-        self._base_url = 'https://cloud.malwarebytes.com'
-        self.account_id = config['accountid'].encode('utf-8')
-        self.client_id = config['clientid'].encode('utf-8')
-        self.client_secret = config['clientsecret']
+        self._base_url = "https://cloud.threatdown.com"
+        self.account_id = config["accountid"].encode("utf-8")
+        self.client_id = config["clientid"].encode("utf-8")
+        self.client_secret = config["clientsecret"]
         self.client_scope = "read write execute"
         self.HEADER = {"x-mwb-clientid": self.client_id, "x-mwb-accountid": self.account_id}
 
@@ -610,7 +591,7 @@ class ThreatDownNebulaConnector(BaseConnector):
         return phantom.APP_SUCCESS
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     import argparse
     import sys
@@ -621,10 +602,10 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
 
-    argparser.add_argument('input_test_json', help='Input Test JSON file')
-    argparser.add_argument('-u', '--username', help='username', required=False)
-    argparser.add_argument('-p', '--password', help='password', required=False)
-    argparser.add_argument('-v', '--verify', action='store_true', help='verify', required=False, default=False)
+    argparser.add_argument("input_test_json", help="Input Test JSON file")
+    argparser.add_argument("-u", "--username", help="username", required=False)
+    argparser.add_argument("-p", "--password", help="password", required=False)
+    argparser.add_argument("-v", "--verify", action="store_true", help="verify", required=False, default=False)
 
     args = argparser.parse_args()
     session_id = None
@@ -633,10 +614,11 @@ if __name__ == '__main__':
     password = args.password
     verify = args.verify
 
-    if(username is not None and password is None):
+    if username is not None and password is None:
 
         # User specified a username but not a password, so ask
         import getpass
+
         password = getpass.getpass("Password: ")
 
     if username and password:
@@ -644,20 +626,20 @@ if __name__ == '__main__':
         try:
             print("Accessing the Login page")
             r = requests.get(login_url, verify=verify, timeout=60)
-            csrftoken = r.cookies['csrftoken']
+            csrftoken = r.cookies["csrftoken"]
 
             data = dict()
-            data['username'] = username
-            data['password'] = password
-            data['csrfmiddlewaretoken'] = csrftoken
+            data["username"] = username
+            data["password"] = password
+            data["csrfmiddlewaretoken"] = csrftoken
 
             headers = dict()
-            headers['Cookie'] = 'csrftoken=' + csrftoken
-            headers['Referer'] = login_url
+            headers["Cookie"] = "csrftoken=" + csrftoken
+            headers["Referer"] = login_url
 
             print("Logging into Platform to get the session id")
             r2 = requests.post(login_url, verify=verify, data=data, headers=headers, timeout=60)
-            session_id = r2.cookies['sessionid']
+            session_id = r2.cookies["sessionid"]
         except Exception as e:
             print("Unable to get session id from the platform. Error: " + str(e))
             sys.exit(1)
@@ -671,8 +653,8 @@ if __name__ == '__main__':
         connector.print_progress_message = True
 
         if session_id is not None:
-            in_json['user_session_token'] = session_id
-            connector._set_csrf_info(csrftoken, headers['Referer'])
+            in_json["user_session_token"] = session_id
+            connector._set_csrf_info(csrftoken, headers["Referer"])
 
         ret_val = connector._handle_action(json.dumps(in_json), None)
         print(json.dumps(json.loads(ret_val), indent=4))

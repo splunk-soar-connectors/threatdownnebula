@@ -1,6 +1,6 @@
 # File: threatdownnebula_connector.py
 #
-# Copyright (c) ThreatDown, 2019-2024
+# Copyright (c) ThreatDown, 2019-2025
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
 from requests_oauthlib import OAuth2Session
 
+
 __author__ = "Rohin Sambath Kumar"
 __copyright__ = "Copyright 2019-2024, ThreatDown"
 __credits__ = ["Rohin Sambath Kumar"]
@@ -44,11 +45,9 @@ class RetVal(tuple):
 
 
 class ThreatDownNebulaConnector(BaseConnector):
-
     def __init__(self):
-
         # Call the BaseConnectors init first
-        super(ThreatDownNebulaConnector, self).__init__()
+        super().__init__()
 
         self._state = None
         self._base_url = None
@@ -58,7 +57,6 @@ class ThreatDownNebulaConnector(BaseConnector):
         return "{NEBULA_URL}{PATH}".format(NEBULA_URL="https://cloud.threatdown.com", PATH=path)
 
     def _handle_test_connectivity(self, param):
-
         # Add an action result object to self(BaseConnector) to represent the action for this param
         action_result = self.add_action_result(ActionResult(dict(param)))
 
@@ -70,26 +68,25 @@ class ThreatDownNebulaConnector(BaseConnector):
         self.save_progress("Connecting to ThreatDown Nebula")
 
         try:
-            self.save_progress("Account ID: {}".format(self.account_id))
-            self.save_progress("Client ID: {}".format(self.client_id))
+            self.save_progress(f"Account ID: {self.account_id}")
+            self.save_progress(f"Client ID: {self.client_id}")
             client = BackendApplicationClient(self.client_id, scope=self.client_scope)
             nebula = OAuth2Session(client=client, scope=self.client_scope)
             nebula.headers.update(self.HEADER)
-            nebula.fetch_token(token_url="{}/oauth2/token".format(self._base_url), client_secret=self.client_secret, scope=self.client_scope)
+            nebula.fetch_token(token_url=f"{self._base_url}/oauth2/token", client_secret=self.client_secret, scope=self.client_scope)
             self.save_progress("Login to ThreatDown Nebula is successful")
         except Exception as err:
             if "'ascii' codec can't decode" in str(err):
                 return action_result.set_status(
                     phantom.APP_ERROR, "Error Connecting to ThreatDown Nebula. Please provide valid asset configuration parameters."
                 )
-            return action_result.set_status(phantom.APP_ERROR, "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err)))
+            return action_result.set_status(phantom.APP_ERROR, f"Error Connecting to ThreatDown Nebula. Details: {err!s}")
 
         # Return success
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_list_endpoints(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
 
         # Add an action result object to self(BaseConnector) to represent the action for this param
         action_result = self.add_action_result(ActionResult(dict(param)))
@@ -123,18 +120,17 @@ class ThreatDownNebulaConnector(BaseConnector):
                 else:
                     more_data = False
 
-            self.save_progress("Total endpoints found: {0}".format(str(len(results["machines"]))))
+            self.save_progress("Total endpoints found: {}".format(str(len(results["machines"]))))
             # Add the response into the data section
             results = {"machines": machines}
             action_result.add_data(results)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in list_endpoints. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in list_endpoints. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_scan_remediate_endpoint(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -163,16 +159,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in list_endpoints. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in list_endpoints. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_scan_report_endpoint(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -201,15 +196,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in list_endpoints. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in list_endpoints. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_isolate_endpoint(self, param):
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -238,15 +233,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in isolate_endpoint. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in isolate_endpoint. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_isolate_process(self, param):
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -275,15 +270,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in isolate_process. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in isolate_process. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_isolate_network(self, param):
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -312,15 +307,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in isolate_network. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in isolate_network. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_isolate_desktop(self, param):
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -349,15 +344,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/isolate"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in isolate_desktop. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in isolate_desktop. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_deisolate_endpoint(self, param):
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -386,16 +381,15 @@ class ThreatDownNebulaConnector(BaseConnector):
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
             response = nebula.post(self.NEBULA_URL("/api/v2/jobs/endpoints/unlock"), data=json.dumps(body), headers=headers)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
             action_result.add_data(response.text)
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in deisolate_endpoint. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in deisolate_endpoint. Details: {err!s}"))
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_get_endpoint_info(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         hostname = param["hostname"]
@@ -420,17 +414,16 @@ class ThreatDownNebulaConnector(BaseConnector):
                 return action_result.get_status()
             response = nebula.get(self.NEBULA_URL("/api/v2/endpoints/" + id))
             data = json.loads(response.text)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in get_endpoint_info. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in get_endpoint_info. Details: {err!s}"))
 
         # Add the response into the data section
         action_result.add_data(data)
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_get_scan_info(self, param):
-
-        self.save_progress("In action handler for: {0}".format(self.get_action_identifier()))
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
         action_result = self.add_action_result(ActionResult(dict(param)))
 
         scan_id = param["scan_id"]
@@ -446,9 +439,9 @@ class ThreatDownNebulaConnector(BaseConnector):
                 return action_result.get_status()
             response = nebula.get(self.NEBULA_URL("/api/v2/scans/" + scan_id))
             data = json.loads(response.text)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in get_scan_info. Details: {0}".format(str(err))))
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in get_scan_info. Details: {err!s}"))
 
         # Add the response into the data section
         action_result.add_data(data)
@@ -462,9 +455,9 @@ class ThreatDownNebulaConnector(BaseConnector):
                 return action_result.get_status(), None
             response = nebula.get(self.NEBULA_URL("/api/v2/endpoints?search_string=" + search_text))
             data = json.loads(response.text)
-            self.save_progress("response: {0}".format(response.text))
+            self.save_progress(f"response: {response.text}")
         except Exception as err:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Error in _get_agent_id. Details: {0}".format(str(err))), None)
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error in _get_agent_id. Details: {err!s}"), None)
 
         endpoints_found = data.get("total_count")
         self.save_progress("Endpoints found: " + str(endpoints_found))
@@ -516,12 +509,9 @@ class ThreatDownNebulaConnector(BaseConnector):
 
             return (phantom.APP_SUCCESS, nebula)
         except Exception as err:
-            return RetVal(
-                action_result.set_status(phantom.APP_ERROR, "Error Connecting to ThreatDown Nebula. Details: {0}".format(str(err))), None
-            )
+            return RetVal(action_result.set_status(phantom.APP_ERROR, f"Error Connecting to ThreatDown Nebula. Details: {err!s}"), None)
 
     def handle_action(self, param):
-
         ret_val = phantom.APP_SUCCESS
 
         # Get the action that we are supposed to execute for this App Run
@@ -565,7 +555,6 @@ class ThreatDownNebulaConnector(BaseConnector):
         return ret_val
 
     def initialize(self):
-
         # Load the state in initialize, use it to store data
         # that needs to be accessed across actions
         self._state = self.load_state()
@@ -585,14 +574,12 @@ class ThreatDownNebulaConnector(BaseConnector):
         return phantom.APP_SUCCESS
 
     def finalize(self):
-
         # Save the state, this data is saved across actions and app upgrades
         self.save_state(self._state)
         return phantom.APP_SUCCESS
 
 
 if __name__ == "__main__":
-
     import argparse
     import sys
 
@@ -615,7 +602,6 @@ if __name__ == "__main__":
     verify = args.verify
 
     if username is not None and password is None:
-
         # User specified a username but not a password, so ask
         import getpass
 

@@ -21,18 +21,6 @@
         "ThreatDown Nebula v2.2.0 (2024-11-05)"
     ],
     "fips_compliant": false,
-    "pip_dependencies": {
-        "wheel": [
-            {
-                "module": "oauthlib",
-                "input_file": "wheels/shared/oauthlib-3.1.0-py2.py3-none-any.whl"
-            },
-            {
-                "module": "requests_oauthlib",
-                "input_file": "wheels/shared/requests_oauthlib-1.3.0-py2.py3-none-any.whl"
-            }
-        ]
-    },
     "configuration": {
         "accountid": {
             "description": "ThreatDown Nebula Account ID",

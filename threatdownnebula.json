@@ -7,7 +7,7 @@
     "logo": "logo_threatdownnebula.svg",
     "logo_dark": "logo_threatdownnebula_dark.svg",
     "product_name": "Malwarebytes Endpoint Protection",
-    "python_version": "3",
+    "python_version": "3.9, 3.13",
     "product_version_regex": ".*",
     "publisher": "ThreatDown",
     "license": "Copyright (c) ThreatDown, 2019-2025",

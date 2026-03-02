@@ -1,2 +1,1 @@
 **Unreleased**
-* Updated ThreatDown logos.

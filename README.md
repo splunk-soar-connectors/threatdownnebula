@@ -24,6 +24,7 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 **accountid** | required | string | ThreatDown Nebula Account ID |
 **clientid** | required | string | ThreatDown Nebula Client ID |
 **clientsecret** | required | password | ThreatDown Nebula Client Secret |
+**region** | required | string | ThreatDown Nebula region (US or EU) |
 
 ### Supported Actions
 

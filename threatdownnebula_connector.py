@@ -54,7 +54,7 @@ class ThreatDownNebulaConnector(BaseConnector):
         self.HEADER = {"Content-Type": "application/json"}
 
     def NEBULA_URL(self, path):
-        return "{NEBULA_URL}{PATH}".format(NEBULA_URL="https://cloud.threatdown.com", PATH=path)
+        return "{NEBULA_URL}{PATH}".format(NEBULA_URL=self._base_url, PATH=path)
 
     def _handle_test_connectivity(self, param):
         # Add an action result object to self(BaseConnector) to represent the action for this param
@@ -564,7 +564,12 @@ class ThreatDownNebulaConnector(BaseConnector):
 
         # Access values in asset config by the name
         # Required values can be accessed directly
-        self._base_url = "https://cloud.threatdown.com"
+        region = config.get("region", "US")
+        region_base_urls = {
+            "US": "https://cloud.threatdown.com",
+            "EU": "https://cloud.euc1.threatdown.com",
+        }
+        self._base_url = region_base_urls.get(region, region_base_urls["US"])
         self.account_id = config["accountid"].encode("utf-8")
         self.client_id = config["clientid"].encode("utf-8")
         self.client_secret = config["clientsecret"]

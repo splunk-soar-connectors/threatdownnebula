@@ -1,7 +1,7 @@
 # ThreatDown Nebula
 
 Publisher: ThreatDown \
-Connector Version: 2.3.0 \
+Connector Version: 2.4.0 \
 Product Vendor: ThreatDown \
 Product Name: Malwarebytes Endpoint Protection \
 Minimum Product Version: 6.2.2
@@ -24,6 +24,7 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 **accountid** | required | string | ThreatDown Nebula Account ID |
 **clientid** | required | string | ThreatDown Nebula Client ID |
 **clientsecret** | required | password | ThreatDown Nebula Client Secret |
+**region** | required | string | ThreatDown Nebula region (US or EU) |
 
 ### Supported Actions
 

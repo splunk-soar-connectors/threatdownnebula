@@ -1,9 +1,9 @@
 # ThreatDown Nebula
 
-Publisher: ThreatDown \
-Connector Version: 2.3.0 \
-Product Vendor: ThreatDown \
-Product Name: Malwarebytes Endpoint Protection \
+Publisher: ThreatDown <br>
+Connector Version: 2.3.0 <br>
+Product Vendor: ThreatDown <br>
+Product Name: Malwarebytes Endpoint Protection <br>
 Minimum Product Version: 6.2.2
 
 This app integrates with the ThreatDown (powered by Malwarebytes) Nebula platform to perform prevention, detection, remediation, and forensics endpoint management tasks
@@ -27,23 +27,23 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration \
-[scan and remediate](#action-scan-and-remediate) - Scan an endpoint and remediate threats found \
-[scan and report](#action-scan-and-report) - Scan an endpoint and report threats found \
-[isolate endpoint](#action-isolate-endpoint) - When threats are found, isolate a network, process, or desktop endpoint \
-[isolate process](#action-isolate-process) - When threats are found, isolate a process endpoint \
-[isolate network](#action-isolate-network) - Network Isolation on an endpoint when threats are found \
-[isolate desktop](#action-isolate-desktop) - Desktop Isolation an endpoint when threats are found \
-[deisolate endpoint](#action-deisolate-endpoint) - Deisolate endpoint after threats are removed \
-[list endpoints](#action-list-endpoints) - List all the endpoints/sensors configured on the device \
-[get endpoint info](#action-get-endpoint-info) - Get information about an endpoint \
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration <br>
+[scan and remediate](#action-scan-and-remediate) - Scan an endpoint and remediate threats found <br>
+[scan and report](#action-scan-and-report) - Scan an endpoint and report threats found <br>
+[isolate endpoint](#action-isolate-endpoint) - When threats are found, isolate a network, process, or desktop endpoint <br>
+[isolate process](#action-isolate-process) - When threats are found, isolate a process endpoint <br>
+[isolate network](#action-isolate-network) - Network Isolation on an endpoint when threats are found <br>
+[isolate desktop](#action-isolate-desktop) - Desktop Isolation an endpoint when threats are found <br>
+[deisolate endpoint](#action-deisolate-endpoint) - Deisolate endpoint after threats are removed <br>
+[list endpoints](#action-list-endpoints) - List all the endpoints/sensors configured on the device <br>
+[get endpoint info](#action-get-endpoint-info) - Get information about an endpoint <br>
 [get scan info](#action-get-scan-info) - Get information about a scan job
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity using supplied configuration
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -58,7 +58,7 @@ No Output
 
 Scan an endpoint and remediate threats found
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -83,7 +83,7 @@ summary.total_objects_successful | numeric | | |
 
 Scan an endpoint and report threats found
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -108,7 +108,7 @@ summary.total_objects_successful | numeric | | |
 
 When threats are found, isolate a network, process, or desktop endpoint
 
-Type: **contain** \
+Type: **contain** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -133,7 +133,7 @@ summary.total_objects_successful | numeric | | |
 
 When threats are found, isolate a process endpoint
 
-Type: **contain** \
+Type: **contain** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -158,7 +158,7 @@ summary.total_objects_successful | numeric | | |
 
 Network Isolation on an endpoint when threats are found
 
-Type: **contain** \
+Type: **contain** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -183,7 +183,7 @@ summary.total_objects_successful | numeric | | |
 
 Desktop Isolation an endpoint when threats are found
 
-Type: **contain** \
+Type: **contain** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -208,7 +208,7 @@ summary.total_objects_successful | numeric | | |
 
 Deisolate endpoint after threats are removed
 
-Type: **correct** \
+Type: **correct** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -233,7 +233,7 @@ summary.total_objects_successful | numeric | | |
 
 List all the endpoints/sensors configured on the device
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -263,7 +263,7 @@ summary.total_objects_successful | numeric | | 0 |
 
 Get information about an endpoint
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -295,7 +295,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Get information about a scan job
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -334,7 +334,7 @@ ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

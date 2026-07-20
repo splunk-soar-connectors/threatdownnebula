@@ -1,6 +1,6 @@
 # File: threatdownnebula_connector.py
 #
-# Copyright (c) ThreatDown, 2019-2025
+# Copyright (c) ThreatDown, 2019-2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
 import json
 import time
 from datetime import datetime
+from urllib.parse import quote
 
 import phantom.app as phantom
 import requests
@@ -437,7 +438,7 @@ class ThreatDownNebulaConnector(BaseConnector):
             ret_val, nebula = self._get_nebula_client(action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
-            response = nebula.get(self.NEBULA_URL("/api/v2/scans/" + scan_id))
+            response = nebula.get(self.NEBULA_URL("/api/v2/scans/" + quote(str(scan_id), safe="")))
             data = json.loads(response.text)
             self.save_progress(f"response: {response.text}")
         except Exception as err:

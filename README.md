@@ -1,7 +1,7 @@
 # ThreatDown Nebula
 
 Publisher: ThreatDown <br>
-Connector Version: 2.3.0 <br>
+Connector Version: 2.3.1 <br>
 Product Vendor: ThreatDown <br>
 Product Name: Malwarebytes Endpoint Protection <br>
 Minimum Product Version: 6.2.2
